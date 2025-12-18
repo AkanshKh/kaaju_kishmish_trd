@@ -1,35 +1,53 @@
-void IS_BRIDGE(int v,int to);
-int n;
-vector<vector<int>> adj;
-vector<bool> visited;
-vector<int> tin, low;
-int timer;
-void dfs(int v, int p = -1) {
-    visited[v] = true;
-    tin[v] = low[v] = timer++;
-    bool parent_skipped = false;
-    for (int to : adj[v]) {
-        if (to == p && !parent_skipped) {
-            parent_skipped = true;
-            continue;
-        }
-        if (visited[to]) {
-            low[v] = min(low[v], tin[to]);
-        } else {
-            dfs(to, v);
-            low[v] = min(low[v], low[to]);
-            if (low[to] > tin[v])
-                IS_BRIDGE(v, to);
+// Bridges
+vector<int> tin(n + 1, -1), low(n + 1, -1), vis(n + 1, 0);
+int clk = 0;
+vector<pair<int, int>> ans;
+function<void(int, int)> dfs = [&](int v, int p){
+    vis[v] = 1;
+    tin[v] = low[v] = clk ++;
+    for(auto x : g[v]){
+        if(x == p) continue;
+        if(!vis[x])
+            dfs(x, v);
+        low[v] = min(low[v], low[x]);
+        if(low[x] > tin[v]){
+            ans.push_back({v, x});
         }
     }
+};
+
+for(int i = 1; i <= n; i ++){
+    if(!vis[i]){
+        dfs(i, -1);
+    }
 }
-void find_bridges() {
-    timer = 0;
-    visited.assign(n, false);
-    tin.assign(n, -1);
-    low.assign(n, -1);
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i])
-            dfs(i);
+
+// Articulation Points
+function<void(int, int)> dfs = [&](int v, int p){
+    vis[v] = 1;
+    tin[v] = low[v] = clk ++;
+    int c = 0;
+    for(auto x : g[v]){
+        if(x == p) continue;
+        if(vis[x]){
+            low[v] = min(low[v], tin[x]);
+        }
+        else{
+            dfs(x, v);
+            low[v] = min(low[v], low[x]);
+            if(low[x] >= tin[v] && p != -1){
+                ans.insert(v);
+            }
+            c ++;
+        }
+    }
+    if(c > 1 && p == -1){
+        ans.insert(v);
+    }
+};
+
+for(int i = 1; i <= n; i ++){
+    if(!vis[i]){
+        dfs(i, -1);
     }
 }
