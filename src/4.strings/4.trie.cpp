@@ -59,3 +59,29 @@ struct btrie{
         return {res, idx};
     }
 };
+auto get = [&](int x){
+    // I need y such that x ^ y is maximum;
+    // if x has 0 then find 1 then 0;
+    // if x has 1 then find 0 then 1;
+    int curr = 0;
+    int ans = 0;
+    for(int i = 29; i >= 0; i --){
+        int bit = (x >> i) & 1;
+        if(bit){
+            if(trie[curr][0]){
+                ans += (1 << i);
+                curr = trie[curr][0];
+            } else {
+                curr = trie[curr][1];
+            }
+        } else {
+            if(trie[curr][1]){
+                ans += (1 << i);
+                curr = trie[curr][1];
+            } else {
+                curr = trie[curr][0];   
+            }
+        }
+    }
+    return ans;
+};

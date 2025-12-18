@@ -14,7 +14,7 @@ const int N = 1e9 + 7;
 //const int N = 998244353;
 const int inf = 0x3f3f3f3f3f3f3f3f;
 const int MAXN = 2e5 + 7;
-mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+mt19937_64 rng(chrono::steady_clock::now() .time_since_epoch().count());
 void solve(){
 }
 int t = 1;

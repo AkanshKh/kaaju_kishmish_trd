@@ -27,7 +27,7 @@ struct CHT {
             lines.pop_back();
         }
         if(!lines.empty()){
-            points.push_back(l.intersect(lines.back()));
+            points.push_back(l.intersect( lines.back()));
         } 
         lines.push_back(l);
     }
