@@ -85,3 +85,33 @@ struct dynCon{
         return ans;
     }
 };
+
+int n, q; 
+fscanf(in, "%d %d", &n, &q);
+map<pair<int, int>, int> mp;
+vector<int> ans(q + 1);
+dynCon dc(n, q);
+for(int i = 0; i < q; i ++){
+    char c; fscanf(in, " %c", &c);
+    if(c == '?'){
+        ans[i] = 1;
+    }
+    else{
+        int v, u; 
+        fscanf(in, "%d %d", &v, &u);
+        if(v > u) swap(v, u);
+        if(c == '+'){
+            mp[{v, u}] = i;
+        }
+        else{
+            dc.add(mp[{v, u}], i - 1, qry(v, u));
+            mp.erase({v, u});
+        }
+    }
+}
+
+for(auto [p, start] : mp){
+    dc.add(start, q, qry(p.first, p.second));
+}
+
+auto f = dc.solve();
