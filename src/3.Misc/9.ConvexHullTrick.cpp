@@ -30,6 +30,11 @@ struct CHT {
         if(!lines.empty()){
             points.push_back(l.intersect( lines.back()));
         } 
+        if(!lines.empty() && lines.back().m == l.m){
+            if(lines.back().c >= l.c) return;
+            lines.pop_back();
+            points.pop_back();
+        }
         lines.push_back(l);
     }
     int query(int x){
