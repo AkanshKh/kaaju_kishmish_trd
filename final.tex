@@ -1,38 +1,12 @@
-% \documentclass[12pt]{article}
-
-% % Page layout
-% \usepackage[a4paper,margin=0.2in]{geometry}
-
-% % Fonts and encoding
-% % \usepackage[T1]{fontenc}
-% % \usepackage{lmodern}
-
-% % Three-column layout
-% \usepackage{multicol}
-
-% % Code highlighting
-% % \usepackage{minted}
-% \usepackage[
-%     cachedir=minted-cache,
-%     cache=true
-% ]{minted}
-
-% % Improve spacing and justification
-% \usepackage{microtype}
-
-% % Formatting tweaks
-% \setlength{\parindent}{0pt}
-% \setlength{\columnsep}{0.1in}   % ↓ smaller gap between columns
-
 \documentclass[12pt]{article}
 
-\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[a4paper,margin=0.4in]{geometry}
 
 \usepackage{multicol}
 
 \usepackage[
     cachedir=minted-cache,
-    frozencache=true
+    cache=true
 ]{minted}
 
 \setminted{
@@ -42,23 +16,18 @@
 }
 
 \usepackage{microtype}
+\usepackage{xcolor}
 
 \setlength{\parindent}{0pt}
 \setlength{\columnsep}{0.1in}
 
-% \newcommand{\includecpp}[2]{
-%     \textbf{#1}\par
-%     \inputminted{cpp}{#2}
-% }
-
-% Custom command for including C++ code
 \newcommand{\includecpp}[2]{
     \subsection{#1}
     \inputminted[
         breaklines,
         fontsize=\scriptsize,
-        frame=single,               % ↓ thinner than 'single'
-        framesep=1pt,              % ↓ less padding inside frame
+        frame=single,               
+        framesep=1pt,              
         tabsize=2,
         rulecolor=\color{black}
     ]{cpp}{#2}
