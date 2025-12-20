@@ -1,51 +1,101 @@
 import os
 import sys
 
-# Filename without extension
-def format_name(filename):
-    return " ".join(
-        x[0].upper() + x[1:]
-        for x in filename.split("-") 
-        if len(x) > 0)
+# Convert "4.euler" -> "Euler"
+def format_name(name):
+    parts = name.split("-")
+    return "".join(p[:1].upper() + p[1:] for p in parts if p)
 
+# Remove numeric prefix: "4.euler" -> "euler"
 def remove_number(name):
-    return name[name.index(".")+1:]
+    return name[name.index(".") + 1:]
+
+def print_preamble():
+    print(r"""\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=0.4in]{geometry}
+
+\usepackage{multicol}
+
+\usepackage[
+    cachedir=minted-cache,
+    cache=true
+]{minted}
+
+\setminted{
+    breaklines,
+    fontsize=\scriptsize,
+    tabsize=2
+}
+
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{0.1in}
+
+\newcommand{\includecpp}[2]{
+    \subsection{#1}
+    \inputminted[
+        breaklines,
+        fontsize=\scriptsize,
+        frame=single,
+        framesep=1pt,
+        tabsize=2,
+        rulecolor=\color{black}
+    ]{cpp}{#2}
+}
+
+\begin{document}
+
+\begin{multicols}{2}
+""")
+
+def print_postamble():
+    print(r"""
+\end{multicols}
+
+\end{document}
+""")
+    
+def latex_escape(text):
+    return text.replace("_", r"\_")
 
 def main():
     include_cmds = {
-        ".cpp": "\\includecpp",
-        ".sh": "\\includescript",
-        ".tex": "\\input",
-        ".texs": "\\includetex",
-        ".py": "\\includepy"
-        # Can be expanded to more langs if needed
+        ".cpp": r"\includecpp",
     }
-    source_path = os.path.join(os.path.normpath(os.getcwd()), "src")
 
-    for dirname in os.listdir(source_path):
+    source_path = os.path.join(os.getcwd(), "src")
+
+    print_preamble()
+
+    for dirname in sorted(os.listdir(source_path)):
         dirpath = os.path.join(source_path, dirname)
         if not os.path.isdir(dirpath):
-            # Might be a file
             continue
-        section_name = format_name(remove_number(dirname))
-        # Escape the backslash so Python doesn't warn about an invalid escape sequence
-        print("\\section{{{}}}".format(section_name))
 
-        for file in os.listdir(dirpath):
+        section_name = latex_escape(format_name(remove_number(dirname)))
+        print(r"\section{{{}}}".format(section_name))
+
+        for file in sorted(os.listdir(dirpath)):
             filepath = os.path.join(dirpath, file)
             if not os.path.isfile(filepath):
-                # Might be a dir
                 continue
-            filename, fileext = os.path.splitext(file)
-            if fileext not in include_cmds.keys():
-                sys.stderr.write("Found unsupported source file {}. Skipping.\n".format(filepath))
+
+            filename, ext = os.path.splitext(file)
+            if ext not in include_cmds:
+                sys.stderr.write(f"Skipping unsupported file {filepath}\n")
                 continue
-            subsection_name = format_name(remove_number(filename))
-            file_relpath = os.path.join(".", os.path.relpath(filepath)).replace("\\", "/")
-            if fileext == ".tex":
-                print("{}{{\"{}\"}}".format(include_cmds[fileext], file_relpath))
-            else:
-                print("{}{{{}}}{{\"{}\"}}".format(include_cmds[fileext], subsection_name, file_relpath))
+
+            subsection_name = latex_escape(format_name(remove_number(filename)))
+            relpath = f"src/{dirname}/{file}"
+
+            print(f"{include_cmds[ext]}{{{subsection_name}}}{{{relpath}}}")
+
+        print()  # blank line between sections
+
+    print_postamble()
 
 if __name__ == "__main__":
     main()
