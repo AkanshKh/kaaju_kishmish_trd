@@ -1,0 +1,57 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Finds all palindromic substrings in O(n) time}
+\PYG{c+c1}{// Returns a vector where the ith element represents the length of the longest palindromic substring}
+\PYG{c+c1}{// centered at index i (for odd\PYGZhy{}length palindromes) or between indices i and i+1 (for even\PYGZhy{}length palindromes)}
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{manacher\PYGZus{}odd}\PYG{p}{(}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{s}\PYG{o}{=}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZdl{}\PYGZsq{}}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{s}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}\PYGZca{}\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{l}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{r}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{max}\PYG{p}{(}\PYG{l+m+mf}{0L}\PYG{n}{L}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{min}\PYG{p}{(}\PYG{n}{r}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{l}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{r}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{)]));}
+\PYG{+w}{        }\PYG{k}{while}\PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]])\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{r}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{l}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+\PYG{+w}{            }\PYG{n}{r}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{ans}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{;}
+\PYG{+w}{    }\PYG{c+c1}{// we get answer as }
+\PYG{+w}{    }\PYG{c+c1}{// even lengthed palindrome between i \PYGZam{} i+1 as (ans[i+1]\PYGZhy{}1)/2}
+\PYG{+w}{    }\PYG{c+c1}{// odd centered at i as ans[i]/2}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{ans}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{()}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{ans}\PYG{p}{.}\PYG{n}{end}\PYG{p}{()}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{manacher}\PYG{p}{(}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{string}\PYG{+w}{ }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{for}\PYG{p}{(}\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZsh{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZsh{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{c+c1}{// cout\PYGZlt{}\PYGZlt{}t\PYGZlt{}\PYGZlt{}endl;}
+\PYG{+w}{    }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{res}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{manacher\PYGZus{}odd}\PYG{p}{(}\PYG{n}{t}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{res}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{.}\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}\PYG{+w}{   }
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Manacher}\PYG{p}{.}\PYG{n}{h}
+\PYG{n+nl}{Description}\PYG{p}{:}\PYG{+w}{ }\PYG{n}{For}\PYG{+w}{ }\PYG{n}{each}\PYG{+w}{ }\PYG{n}{position}\PYG{+w}{ }\PYG{n}{in}\PYG{+w}{ }\PYG{n}{a}\PYG{+w}{ }\PYG{n}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{computes}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{half}\PYG{+w}{ }\PYG{n}{length}
+\PYG{n}{of}\PYG{+w}{ }\PYG{n}{longest}\PYG{+w}{ }\PYG{n}{even}\PYG{+w}{ }\PYG{n}{palindrome}\PYG{+w}{ }\PYG{n}{around}\PYG{+w}{ }\PYG{n}{pos}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{longest}\PYG{+w}{ }\PYG{n}{odd}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{half}\PYG{+w}{ }\PYG{n}{rounded}
+\PYG{n}{down}\PYG{p}{).}
+\PYG{n+nl}{Time}\PYG{p}{:}\PYG{+w}{ }\PYG{n}{O}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{N}\PYG{p}{)}
+\PYG{n}{e7ad79}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{13}\PYG{+w}{ }\PYG{n}{lines}
+\PYG{n}{array}\PYG{o}{\PYGZlt{}}\PYG{n}{vi}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{manacher}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{string}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sz}\PYG{p}{(}\PYG{n}{s}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{array}\PYG{o}{\PYGZlt{}}\PYG{n}{vi}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{p}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{vi}\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{vi}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)\PYGZcb{};}
+\PYG{+w}{    }\PYG{n}{rep}\PYG{p}{(}\PYG{n}{z}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{l}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{r}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{r}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{o}{+!}\PYG{n}{z}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{r}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{[}\PYG{n}{z}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{min}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{[}\PYG{n}{z}\PYG{p}{][}\PYG{n}{l}\PYG{o}{+}\PYG{n}{t}\PYG{p}{]);}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{L}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{n}{p}\PYG{p}{[}\PYG{n}{z}\PYG{p}{][}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{R}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{+}\PYG{n}{p}\PYG{p}{[}\PYG{n}{z}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}!}\PYG{n}{z}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{L}\PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{R}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{\PYGZlt{}}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{n}{L}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{[}\PYG{n}{R}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{])}
+\PYG{+w}{    }\PYG{n}{p}\PYG{p}{[}\PYG{n}{z}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{++}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{L}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{R}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{R}\PYG{o}{\PYGZgt{}}\PYG{n}{r}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{l}\PYG{o}{=}\PYG{n}{L}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{r}\PYG{o}{=}\PYG{n}{R}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{p}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

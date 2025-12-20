@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Remember to change define int long long }
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}ext/pb\PYGZus{}ds/assoc\PYGZus{}container.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}ext/pb\PYGZus{}ds/tree\PYGZus{}policy.hpp\PYGZdq{}}
+\PYG{k}{using}\PYG{+w}{ }\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{\PYGZus{}\PYGZus{}gnu\PYGZus{}pbds}\PYG{p}{;}
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }
+\PYG{k}{using}\PYG{+w}{ }\PYG{n}{ordered\PYGZus{}set}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tree}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{null\PYGZus{}type}\PYG{p}{,}\PYG{n}{less}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rb\PYGZus{}tree\PYGZus{}tag}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tree\PYGZus{}order\PYGZus{}statistics\PYGZus{}node\PYGZus{}update}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{p}{;}
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{key}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{value}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{cmp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{less}\PYG{o}{\PYGZlt{}}\PYG{n}{key}\PYG{o}{\PYGZgt{}\PYGZgt{}}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n}{ordered\PYGZus{}map}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{tree}\PYG{o}{\PYGZlt{}}\PYG{n}{key}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{cmp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rb\PYGZus{}tree\PYGZus{}tag}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tree\PYGZus{}order\PYGZus{}statistics\PYGZus{}node\PYGZus{}update}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{c+c1}{// find\PYGZus{}by\PYGZus{}order(k)  returns iterator to kth element starting from 0;}
+\PYG{c+c1}{// order\PYGZus{}of\PYGZus{}key(k) returns count of elements strictly smaller than k;}
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n}{min\PYGZus{}heap}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{priority\PYGZus{}queue}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{p}{,}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{,}\PYG{n}{greater}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{p}{;}\PYG{+w}{ }
+\end{Verbatim}
