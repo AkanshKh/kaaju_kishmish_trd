@@ -1,6 +1,5 @@
 projectName = iitg-icpc-trd
 
 gen:
-	xelatex -jobname=$(projectName) main.tex
-	xelatex -jobname=$(projectName) main.tex
-	xelatex -jobname=$(projectName) main.tex
+	xelatex -shell-escape -jobname=$(projectName) contents.tex
+	xelatex -shell-escape -jobname=$(projectName) contents.tex
