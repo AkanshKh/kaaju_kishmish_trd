@@ -2,19 +2,11 @@ struct Min{
     int x;
     Min(int x = inf) : x(x) {}
 };
-
 Min operator+(const Min& a, const Min& b){
     return std::min(a.x, b.x);
 }
-
-void apply(int &a, int b){
-    a += b;
-}
-
-void apply(Min& a, int b){
-    a.x += b;
-}
-
+void apply(int &a, int b) a += b;
+void apply(Min& a, int b) a.x += b;
 // Always make a class for them and define basic overloads
 template<class Node, class Lazy, class Merge = std::plus<Node>>
 struct LazySegTree {
@@ -67,9 +59,7 @@ struct LazySegTree {
         update(1, 0, _n, idx, nodeVal);
     }
     Node rangeQuery(int node, int st, int en, int ql, int qr){
-        if(st >= qr || en <= ql){
-            return Node();
-        }
+        if(st >= qr || en <= ql) return Node();
         if(st >= ql && en <= qr){
             return _segT[node];
         }
@@ -81,9 +71,7 @@ struct LazySegTree {
         return rangeQuery(1, 0, _n, ql, qr);
     }
     void rangeApply(int node, int st, int en, int ql, int qr, const Lazy& lazy){
-        if(st >= qr || en <= ql){
-            return;
-        }
+        if(st >= qr || en <= ql) return;
         if(st >= ql && en <= qr){
             apply(node, lazy);
             return;
@@ -98,6 +86,5 @@ struct LazySegTree {
         rangeApply(1, 0, _n, ql, qr, lazy);
     }
 };
-
 // LazySegTree<Min, int> seg(a);
 // For range [i, j] use i, j + 1

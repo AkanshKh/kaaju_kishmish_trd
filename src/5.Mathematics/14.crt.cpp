@@ -9,7 +9,6 @@ int extGcd(int a, int b, int &x, int &y){
     y = x1 - (a / b) * y1;
     return d;
 }
-
 int modinv(int a, int m){
     int x, y;
     int g = extGcd(a, m, x, y);
@@ -20,7 +19,6 @@ int modinv(int a, int m){
 int get(int a, int b, int c, int d, int n){
     // ax = -b mod n -> ax - kn = -b -> gcd(a, n) | b
     // cx = -d mod n
-
     int g1 = gcd(a, n);
     if((-b) % g1 != 0) return -1;
     int m1 = n / g1;

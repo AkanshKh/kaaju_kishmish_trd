@@ -2,13 +2,15 @@ namespace GetPrimitve{
     vi Divisors;
     vi Divisor(lli x){vi ans;
         for(lli i=2;i*i<=x;i++){
-            if(x%i==0){ans.EB(i);while(x%i==0)x/=i;}
+            if(x%i==0){
+                ans.EB(i); while(x%i==0)x/=i;
+            }
         }
         if(x>1)ans.EB(x);return ans;
     }
     bool check(int prim,int p,vi &divs){
         for(auto v:divs){
-            if(binpow(prim,(p-1)/v,p)==1)return 0;
+            if(binpow(prim,(p-1)/v,p)==1) return 0;
         }return 1;
     }
     int getRoot(int p){
@@ -31,7 +33,7 @@ template<lli NTTMOD,lli PRIMITIVE_ROOT> struct POLYMUL{
       }
       for(int d=0;(1<<d)<n;d++){
         int m=1<<d,m2=m*2;
-        lli unit_p0=::binpow(PRIMITIVE_ROOT,(NTTMOD-1)/m2,NTTMOD);
+        lli unit_p0= ::binpow(PRIMITIVE_ROOT, (NTTMOD-1)/m2,NTTMOD);
         if(oper<0)unit_p0=modInv(unit_p0);
         for(int i=0;i<n;i+= m2) {
           polybase unit = 1;
@@ -68,18 +70,15 @@ template<lli NTTMOD,lli PRIMITIVE_ROOT> struct POLYMUL{
             return {};
         }
         int mid=(l+r)>>1;
-        vi x=calc(arr,l,mid),y=calc(arr,mid+1,r);
+        vi x=calc(arr,l,mid), y=calc(arr,mid+1,r);
         return mul(x,y);
     }
 };
 POLYMUL<998244353,3> ntt;
-
-
 lli phi(lli x){// will be a power of 2 mostly.
     if(x==1)return 1;
     else return x/2;
 }
-
 vi arr[20];
 void solve(){
     lli n,k,q;
@@ -96,7 +95,7 @@ void solve(){
     }   
     rep(i,2,19){
         arr[i]=ntt.mul(arr[i-1],arr[i-1]);
-        if(arr[i].size()>100001)arr[i].resize(100001);
+        if(arr[i].size()>100001) arr[i].resize(100001);
     }
     sort(all(divs));
     cin>>q;
@@ -105,17 +104,15 @@ void solve(){
         lli ans=0;
         for(int i=0;i<divs.size();i++){
             if(S%(n/divs[i])!=0)continue;
-            ans=(ans+arr[i+1][S/(n/divs[i])]*phi(n/divs[i]))%MOD;
+            ans=(ans+ arr[i+1][S/(n/divs[i])] * phi(n/divs[i]))%MOD;
         }
         ans=ans*binpow(n,MOD-2,MOD)%MOD;
         cout<<ans<<endl;
     }
 }       
-
 // youKnowWho's FFT
 using cd = complex<double>;
 const double PI = acos(-1);
- 
 void fft(vector<cd> & a, bool invert) {
     int n = a.size();
     for (int i = 1, j = 0; i < n; i++) {
@@ -141,28 +138,21 @@ void fft(vector<cd> & a, bool invert) {
         for (cd & x : a) x /= n;
     }
 }
-vector<int> multiply(vector<int> const& a, int n)
-{
+vector<int> multiply(vector<int> const& a, int n){
     vector<cd> fa(n);
-    for (int i = 0; i < (int)a.size(); i++) {
-        fa[i] = a[i];
-    }
-    for(int i = a.size(); i < n; i ++){
-        fa[i] = 0;
-    }
+    for (int i = 0; i < (int)a.size(); i++) fa[i] = a[i];
+    for(int i = a.size(); i < n; i ++) fa[i] = 0;
     fft(fa, false);
     for(int i = 0; i < n; i ++){
         fa[i] *= fa[i];
     }
     fft(fa, true);
-
     vector<int> res(n);
     for(int i = 0; i < n; i ++){
         res[i] = round(fa[i].real());
     }
     return res;
 }
-
 vector<int> p(MAXN);
 void solve(){
     int n; cin>>n;
@@ -173,17 +163,10 @@ void solve(){
         mx = max(mx, s[i]);
     }
     mx += 1000;
-    for(int i = 1; i <= n; i ++){
-        p[s[i]] = 1;
-    }
-
+    for(int i = 1; i <= n; i ++) p[s[i]] = 1;
     n = 1;
-    while(n <= MAXN){
-        n <<= 1;
-    }
+    while(n <= MAXN) n <<= 1;
     vector<int> res = multiply(p, n);
-    // dbg(res);
-
     int c = 0;
     for(int i = 2; i <= 2 * mx; i += 2){
         int md = i / 2;
@@ -191,5 +174,4 @@ void solve(){
             c += (res[i] - 1) / 2;
         }
     }
-    cout<<c<<endl;
 }

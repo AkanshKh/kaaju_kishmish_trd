@@ -10,7 +10,6 @@ struct Flow {
     std::vector<std::vector<int>> g;
     std::vector<int> cur, h;
     Flow(int n) : n(n), g(n) {}
-    
     bool bfs(int s, int t) {
         h.assign(n, -1);
         std::queue<int> que;
@@ -32,11 +31,8 @@ struct Flow {
         }
         return false;
     }
-    
     T dfs(int u, int t, T f) {
-        if (u == t) {
-            return f;
-        }   
+        if (u == t) return f;
         auto r = f;
         for (int &i = cur[u]; i < (int)(g[u].size()); ++i) {
             const int j = g[u][i];
@@ -91,7 +87,6 @@ struct Flow {
         cout<<endl;
     }
 };
-
 queue<int> q;
 vector<bool> vis(n + 1, false);
 q.push(1);

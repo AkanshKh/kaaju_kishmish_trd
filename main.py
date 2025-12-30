@@ -11,10 +11,22 @@ def remove_number(name):
     return name[name.index(".") + 1:]
 
 def print_preamble():
-    print(r"""\documentclass[12pt]{article}
+    print(r"""
 
-\usepackage[a4paper,portrait]{geometry}
-\geometry{top=2.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm,columnsep=1cm}
+\documentclass[12pt,a4paper,landscape]{article}
+
+\usepackage[a4paper,landscape]{geometry}
+\geometry{
+  left=0.4cm,
+  right=0.4cm,
+  top=0.5cm,
+  bottom=0.5cm
+}
+
+% \documentclass[12pt]{article}
+
+% \usepackage[a4paper,portrait]{geometry}
+% \geometry{top=2.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm,columnsep=1cm}
 
 \usepackage{multicol}
 \setlength{\columnseprule}{0.2pt}
@@ -36,7 +48,7 @@ def print_preamble():
 ]{minted}
 \setminted{
     breaklines,
-    fontsize=\footnotesize,
+    fontsize=\normalsize,
     tabsize=2
 }
 
@@ -48,8 +60,7 @@ def print_preamble():
     \subsection{#1}
     \inputminted[
         breaklines,
-        fontsize=\footnotesize,
-        frame=single,
+        fontsize=\normalsize,
         framesep=1pt,
         tabsize=2,
         rulecolor=\color{black}
@@ -70,13 +81,13 @@ def print_preamble():
 \pagenumbering{arabic}
 \vspace{1em}
 
-\begin{multicols}{2}
+\begin{multicols*}{3}
 """)
 
 
 def print_postamble():
     print(r"""
-\end{multicols}
+\end{multicols*}
 
 \end{document}
 """)

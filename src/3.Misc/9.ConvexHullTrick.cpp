@@ -48,7 +48,6 @@ void solve(){
     for(int i = 1; i <= n; i ++){
         cin>>a[i];
     }
-
     CHT cht;
     cht.init(CHT::Line(-2 * a[1], a[1] * a[1]));
     for(int i = 2; i <= n; i ++){
@@ -57,14 +56,12 @@ void solve(){
     }
     cout<<dp[n]<<endl;
 }
-
 // Anyhow works, Queries Maximum
 struct Line {
     mutable int k, m, p;
     bool operator<(const Line& o) const { return k < o.k; }
     bool operator<(int x) const { return p < x; }
 };
-
 struct CHT : multiset<Line, less<>> {
     // (for doubles, use inf = 1/.0, div(a,b) = a/b)
     int div(int a, int b) { // floored division

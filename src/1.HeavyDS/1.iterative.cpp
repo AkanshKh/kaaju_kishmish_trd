@@ -1,8 +1,5 @@
-struct Data{
-};
-
-Data op(const Data &a, const Data &b){
-}   
+struct Data{};
+Data op(const Data &a, const Data &b){}
 struct segtree{
     vector<Data> d;
     int _n, log, size;
@@ -24,14 +21,12 @@ struct segtree{
     }
     Data prod(int l, int r) { // !!! q(l,r) return l to r-1
         if (l == r) return Data();
-        l += size;
-        r += size;
+        l += size; r += size;
         Data sml = Data(), smr = Data();
         while (l < r) {
             if (l&1) sml = op(sml, d[l++]);
             if (r&1) smr = op(d[--r], smr);
-            l >>= 1;
-            r >>= 1;
+            l >>= 1; r >>= 1;
         }
         return op(sml, smr);
     }

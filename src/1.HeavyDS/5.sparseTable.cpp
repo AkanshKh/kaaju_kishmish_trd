@@ -9,10 +9,8 @@ struct SPARSE_TABLE{
     SPARSE_TABLE(const vector<T> &v , const F &f) : fun(f){
         n = static_cast<int>(v.size());
         int maxN = log_floor(n) + 1;
-
         st.resize(maxN);
         st[0] = v;
-
         for(int i = 1; i < maxN; i++){
             st[i].resize(n - (1 << i) + 1);
 

@@ -11,19 +11,19 @@ void dfs(int v, int p){
     }
 }
 auto lca = [&](int x, int y){
-        if(dst[x] < dst[y]) swap(x, y);
-        for(int i = 19; i >= 0; i --){
-            if(dst[up[i][x]] >= dst[y]){
-                x = up[i][x];
-            }
+    if(dst[x] < dst[y]) swap(x, y);
+    for(int i = 19; i >= 0; i --){
+        if(dst[up[i][x]] >= dst[y]){
+            x = up[i][x];
         }
-        if(x == y) return x;
-        for(int i = 19; i >= 0; i --){
-            if(up[i][x] != up[i][y]){
-                x = up[i][x];
-                y = up[i][y];
-            }
+    }
+    if(x == y) return x;
+    for(int i = 19; i >= 0; i --){
+        if(up[i][x] != up[i][y]){
+            x = up[i][x];
+            y = up[i][y];
         }
-        return up[0][x];
-    };
+    }
+    return up[0][x];
+};
  

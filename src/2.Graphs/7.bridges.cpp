@@ -15,13 +15,6 @@ function<void(int, int)> dfs = [&](int v, int p){
         }
     }
 };
-
-for(int i = 1; i <= n; i ++){
-    if(!vis[i]){
-        dfs(i, -1);
-    }
-}
-
 // Articulation Points
 function<void(int, int)> dfs = [&](int v, int p){
     vis[v] = 1;
@@ -45,9 +38,3 @@ function<void(int, int)> dfs = [&](int v, int p){
         ans.insert(v);
     }
 };
-
-for(int i = 1; i <= n; i ++){
-    if(!vis[i]){
-        dfs(i, -1);
-    }
-}

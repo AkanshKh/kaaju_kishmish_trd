@@ -40,14 +40,12 @@ struct dsuRoll{
         rnk[cur.u] = cur.rnk_u;
     }
 };
-
 struct qry{
     int v, u; 
     bool f;
     qry() {}
     qry(int v, int u) : v(v), u(u) {}
 };
-
 struct dynCon{
     int n, sz;
     vector<vector<qry>> seg;
@@ -85,17 +83,12 @@ struct dynCon{
         return ans;
     }
 };
-
-int n, q; 
-fscanf(in, "%d %d", &n, &q);
 map<pair<int, int>, int> mp;
 vector<int> ans(q + 1);
 dynCon dc(n, q);
 for(int i = 0; i < q; i ++){
     char c; fscanf(in, " %c", &c);
-    if(c == '?'){
-        ans[i] = 1;
-    }
+    if(c == '?') ans[i] = 1;
     else{
         int v, u; 
         fscanf(in, "%d %d", &v, &u);
@@ -109,9 +102,7 @@ for(int i = 0; i < q; i ++){
         }
     }
 }
-
 for(auto [p, start] : mp){
     dc.add(start, q, qry(p.first, p.second));
 }
-
 auto f = dc.solve();

@@ -90,7 +90,6 @@ namespace PollardRho {
     return v;
   }
 }
-
 void solve(){
     ll m, n, k; cin>>m>>n>>k;
     set<ll> st;
@@ -99,19 +98,5 @@ void solve(){
         auto f = PollardRho::factorize(x);
         for(auto y : f) st.insert(y);
     }
-    for(ll i = 0; i < k; i ++){
-        ll a, b, c; cin>>a>>b>>c;
-    }
-    for(auto x : st) cout<<x<<" ";
-    cout<<endl;
 }
-int32_t main() {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0);
-  PollardRho::init();
-  int t = 1;
-  while (t--) {
-    solve();
-  }
-  return 0;
-}
+PollardRho::init();

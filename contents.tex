@@ -1,7 +1,19 @@
-\documentclass[12pt]{article}
 
-\usepackage[a4paper,portrait]{geometry}
-\geometry{top=2.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm,columnsep=1cm}
+
+\documentclass[12pt,a4paper,landscape]{article}
+
+\usepackage[a4paper,landscape]{geometry}
+\geometry{
+  left=0.4cm,
+  right=0.4cm,
+  top=0.5cm,
+  bottom=0.5cm
+}
+
+% \documentclass[12pt]{article}
+
+% \usepackage[a4paper,portrait]{geometry}
+% \geometry{top=2.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm,columnsep=1cm}
 
 \usepackage{multicol}
 \setlength{\columnseprule}{0.2pt}
@@ -23,7 +35,7 @@
 ]{minted}
 \setminted{
     breaklines,
-    fontsize=\footnotesize,
+    fontsize=\normalsize,
     tabsize=2
 }
 
@@ -35,8 +47,7 @@
     \subsection{#1}
     \inputminted[
         breaklines,
-        fontsize=\footnotesize,
-        frame=single,
+        fontsize=\normalsize,
         framesep=1pt,
         tabsize=2,
         rulecolor=\color{black}
@@ -57,10 +68,11 @@
 \pagenumbering{arabic}
 \vspace{1em}
 
-\begin{multicols}{2}
+\begin{multicols*}{3}
 
 \section{HeavyDS}
 \includecpp{Iterative}{src/1.HeavyDS/1.iterative.cpp}
+\includecpp{Sgtree}{src/1.HeavyDS/10.sgtree.cpp}
 \includecpp{Lazy}{src/1.HeavyDS/2.Lazy.cpp}
 \includecpp{PersistentSegmentTree}{src/1.HeavyDS/3.persistentSegmentTree.cpp}
 \includecpp{Fenwick\_sum}{src/1.HeavyDS/4.fenwick_sum.cpp}
@@ -90,7 +102,6 @@
 \includecpp{2SAT\_Shrey}{src/3.Misc/11.2SAT_Shrey.cpp}
 \includecpp{Hungarian}{src/3.Misc/13.Hungarian.cpp}
 \includecpp{OrderedSet}{src/3.Misc/2.orderedSet.cpp}
-\includecpp{Fast}{src/3.Misc/5.fast.cpp}
 \includecpp{Template}{src/3.Misc/7.template.cpp}
 \includecpp{Basis}{src/3.Misc/8.basis.cpp}
 \includecpp{ConvexHullTrick}{src/3.Misc/9.ConvexHullTrick.cpp}
@@ -113,10 +124,9 @@
 \includecpp{Euler\_Totient}{src/5.Mathematics/3.Euler_Totient.cpp}
 \includecpp{NCr\_Shrey}{src/5.Mathematics/5.nCr_Shrey.cpp}
 \includecpp{Matrix}{src/5.Mathematics/6.matrix.cpp}
-\includecpp{MillerRabin}{src/5.Mathematics/9.MillerRabin.cpp}
 
 
-\end{multicols}
+\end{multicols*}
 
 \end{document}
 

@@ -5,14 +5,10 @@ vector<int> d(n, INF);
         for (Edge e : edges)
             if (d[e.a] < INF)
                 d[e.b] = min(d[e.b], d[e.a] + e.cost);
-
-
 // Dijkstra Algorithm
 void dijkstra(int s, vector<int> & d, vector<int> & p) {
     int n = adj.size();
-    d.assign(n, INF);
-    p.assign(n, -1);
-
+    d.assign(n, INF); p.assign(n, -1);
     d[s] = 0;
     using pii = pair<int, int>;
     priority_queue<pii, vector<pii>, greater<pii>> q;
@@ -23,11 +19,9 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
         q.pop();
         if (d_v != d[v])
             continue;
-
         for (auto edge : adj[v]) {
             int to = edge.first;
             int len = edge.second;
-
             if (d[v] + len < d[to]) {
                 d[to] = d[v] + len;
                 p[to] = v;
@@ -36,7 +30,6 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
         }
     }
 }
-
 // Floyd Warshall
 for (int k = 0; k < n; ++k) {
     for (int i = 0; i < n; ++i) {
