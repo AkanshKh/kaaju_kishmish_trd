@@ -1,18 +1,16 @@
-\documentclass[8pt,a4paper]{article}
+\documentclass[10pt,a4paper,landscape]{article}
 
-\usepackage[a4paper,portrait]{geometry}
-\geometry{top=2.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm,columnsep=1cm}
+\usepackage[a4paper,landscape]{geometry}
+\geometry{
+  left=0.4cm,
+  right=0.4cm,
+  top=0.5cm,
+  bottom=0.5cm
+}
 
 \usepackage{multicol}
+\setlength{\columnsep}{0.45cm}
 \setlength{\columnseprule}{0.2pt}
-
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{IIT Guwahati (Akansh, Shreyans, Tanmay)}
-\rhead{\thepage\ of \pageref{LastPage}}
 
 % Encoding and fonts
 \usepackage[T1]{fontenc}
@@ -25,54 +23,27 @@
 % Tables and lists
 \usepackage{array,booktabs,multirow}
 \usepackage{enumitem}
-\setlist{nosep}
-
-% Colors
-\usepackage{xcolor}
-
-% Code listings (compact)
-\usepackage{listings}
-\lstset{
-    basicstyle=\ttfamily\footnotesize,
-    keywordstyle=\color{blue},
-    commentstyle=\color{gray},
-    stringstyle=\color{red},
-    breaklines=true,
-    frame=none,
-    tabsize=2,
-    showstringspaces=false
-}
+\setlist{nosep,leftmargin=*}
 
 % Typography
 \usepackage{microtype}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 
+% Compact section formatting
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.4ex}{0.2ex}
+\titlespacing*{\subsection}{0pt}{0.3ex}{0.1ex}
+\titleformat{\section}{\bfseries\small}{}{0pt}{}
+\titleformat{\subsection}{\bfseries\footnotesize}{}{0pt}{}
+
 \begin{document}
-
-% \begin{multicols}{3}
-
-% \section*{Graphs}
-% Dijkstra, BFS, DFS, SCC, bridges, articulation points.
-
-% \section*{Math}
-% GCD, LCM, modular inverse, CRT, combinatorics.
-
-% \section*{Code}
-% \begin{lstlisting}
-% int gcd(int a,int b){
-%     return b?gcd(b,a%b):a;
-% }
-% \end{lstlisting}
-
-% \end{multicols}
-
-% \end{document}
-
+\begin{multicols*}{3}
 
 \section{Combinatorial}
 
 \section{Permutations}
+
 	\subsection{Cycles}
 		Let $g_S(n)$ be the number of $n$-permutations whose cycle lengths all belong to the set $S$. Then
 		$$\sum_{n=0} ^\infty g_S(n) \frac{x^n}{n!} = \exp\left(\sum_{n\in S} \frac{x^n} {n} \right)$$
@@ -165,4 +136,5 @@
 			\item permutations of $[n]$ with no 3-term increasing subseq.
 		\end{itemize}
 
+\end{multicols*}
 \end{document}

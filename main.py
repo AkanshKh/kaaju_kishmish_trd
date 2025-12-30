@@ -36,17 +36,19 @@ def print_preamble():
 ]{minted}
 \setminted{
     breaklines,
-    fontsize=\scriptsize,
+    fontsize=\footnotesize,
     tabsize=2
 }
 
+          
 \setlength{\parindent}{0pt}
+\usemintedstyle{bw}
 
 \newcommand{\includecpp}[2]{
     \subsection{#1}
     \inputminted[
         breaklines,
-        fontsize=\scriptsize,
+        fontsize=\footnotesize,
         frame=single,
         framesep=1pt,
         tabsize=2,
@@ -58,12 +60,12 @@ def print_preamble():
 \thispagestyle{fancy}
 \pagenumbering{Roman}
 
-\begin{center}
-    {\Huge \textsc{ICPC Team Reference Document}}\\[2em]
-    {\LARGE \textbf{Kaaju Kishmish}}\\[1em]
-    {\Large Akansh Khandelwal \quad • \quad Shreyans Garg \quad • \quad Tanmay Mittal}\\[2em]
-    \rule{\textwidth}{1pt}
-\end{center}
+% \begin{center}
+%     {\Huge \textsc{ICPC Team Reference Document}}\\[2em]
+%     {\LARGE \textbf{Kaaju Kishmish}}\\[1em]
+%     {\Large Akansh Khandelwal \quad • \quad Shreyans Garg \quad • \quad Tanmay Mittal}\\[2em]
+%     \rule{\textwidth}{1pt}
+% \end{center}
 
 \pagenumbering{arabic}
 \vspace{1em}

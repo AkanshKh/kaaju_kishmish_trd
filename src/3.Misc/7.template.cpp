@@ -1,10 +1,4 @@
 #include<bits/stdc++.h>
-#ifndef ONLINE_JUDGE
-#include "template.cpp"
-#else
-#define dbg(...) ;
-#define debugArr(...) ;
-#endif
 using namespace std;
 #define int long long
 #define endl "\n"   
@@ -26,6 +20,5 @@ int32_t main(){
         solve();
     }
 }
-
 #pragma GCC optimize ("Ofast")
 #pragma GCC target ("avx2")
